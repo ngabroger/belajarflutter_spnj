@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:restaurant/data/restaurant_data.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final RestaurantPlace place;
+  const DetailScreen({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +19,15 @@ class DetailScreen extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25)),
-                child: SizedBox(
-                  width: 500,
-                  height: 350,
-                  child: Image.asset(
-                    'assets/images/broto.jpg',
-                    fit: BoxFit.fill,
+                child: Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    width: 500,
+                    height: 350,
+                    child: Image.asset(
+                      place.imgAsset,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -35,7 +40,9 @@ class DetailScreen extends StatelessWidget {
                         end: Alignment.bottomRight),
                     borderRadius: BorderRadius.all(Radius.circular(50))),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios_rounded,
                       color: Colors.black,
@@ -50,7 +57,7 @@ class DetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Pecel lele Broto',
+                  place.name,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.1,
@@ -64,7 +71,7 @@ class DetailScreen extends StatelessWidget {
                       size: 30,
                     ),
                     Text(
-                      '4.6',
+                      place.rating,
                       style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600, fontSize: 20),
                     ),
@@ -76,7 +83,7 @@ class DetailScreen extends StatelessWidget {
           const SizedBox(height: 15),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 15),
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
                 border: Border.all(width: 2.1, color: Colors.black54),
                 borderRadius: BorderRadius.circular(12),
@@ -99,7 +106,7 @@ class DetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      'Everyday',
+                      place.open,
                       style: GoogleFonts.poppins(
                           fontSize: 14, fontWeight: FontWeight.w600),
                     )
@@ -118,7 +125,7 @@ class DetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      '09.00-00.00',
+                      place.time,
                       style: GoogleFonts.poppins(
                           fontSize: 14, fontWeight: FontWeight.w600),
                     )
@@ -137,7 +144,7 @@ class DetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      'Bogor',
+                      place.address,
                       style: GoogleFonts.poppins(
                           fontSize: 14, fontWeight: FontWeight.w600),
                     )
@@ -163,7 +170,7 @@ class DetailScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Pecel lele atau pecek lele atau penyetan adalah makanan khas Jawa Timur, yang terdiri dari ikan lele dan sambal tomat. Biasanya, pecel lele berupa ikan lele yang digoreng kering dengan minyak, lalu disajikan dengan sambal tomat dan lalapan. Lalapan biasa terdiri dari kemangi, kubis, mentimun, dan kacang panjang.',
+                    place.description,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                     ),
